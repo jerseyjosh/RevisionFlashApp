@@ -1,0 +1,83 @@
+/* Importing a sleek Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Apply the font to the entire application */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  background-color: #f0f4f8;
+  color: #333;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
+button, input {
+  font-family: 'Inter', sans-serif;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+input[type="file"] {
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Flashcard styles */
+.flashcard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--flashcard-bg, #FFFFFF); /* Use CSS variables to change background */
+  text-align: center;
+}
+
+.flashcard h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.flashcard input {
+  padding: 15px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.flashcard p {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.flashcard button {
+  padding: 15px;
+  font-size: 1.25rem;
+}

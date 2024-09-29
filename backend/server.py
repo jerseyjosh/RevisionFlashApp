@@ -18,13 +18,14 @@ load_dotenv(find_dotenv())
 app = FastAPI()
 
 # Enable CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins for CORS
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if os.getenv("ENV", "dev") == "dev":
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"], 
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 # System prompt for OpenAI API
 FLASHCARDS_PROMPT = """
@@ -53,7 +54,7 @@ Return 1 if the answers are informationally equivalent, and 0 if they are not.
 client = AsyncOpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 # Route to generate flashcards
-@app.post("/generate_flashcards")
+@app.post("/api/generate_flashcards")
 async def generate_flashcards(request: Request):
     try:
         # Parse the request body
@@ -83,7 +84,7 @@ async def generate_flashcards(request: Request):
         raise HTTPException(status_code=500, detail="Failed to generate flashcards")
     
 # Route to validate answers
-@app.post("/validate_answer")
+@app.post("/api/validate_answer")
 async def validate_answer(request: Request):
     try:
         # Parse the request body
@@ -111,4 +112,4 @@ async def validate_answer(request: Request):
 # Entry point for running the FastAPI app
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("SERVER_PORT", 8000)), log_level="debug")
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("API_PORT", 8000)), log_level="debug")
